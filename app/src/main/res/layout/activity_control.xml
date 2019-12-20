@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/on_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="On via BLE"/>
+
+    <Button
+        android:id="@+id/off_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Off via BLE" />
+
+    <Button
+        android:id="@+id/on_btn_internet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="On via Internet"/>
+
+    <Button
+        android:id="@+id/off_btn_internet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Off via Internet" />
+
+    <TextView
+        android:text="00:00:00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timerTextView"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:textColor="#009688"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/stop_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Booking" />
+
+
+
+</LinearLayout>
