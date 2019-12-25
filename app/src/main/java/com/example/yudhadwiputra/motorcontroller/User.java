@@ -2,14 +2,12 @@ package com.example.yudhadwiputra.motorcontroller;
 
 public class User {
     private int id;
-    private String username, email, phoneNumber, address;
+    private String username, email;
 
-    public User(int id, String username, String email, String phoneNumber, String address) {
+    public User(int id, String username, String email) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
     }
 
     public int getId() {
@@ -22,13 +20,5 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
     }
 }

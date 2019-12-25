@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView TextPlate;
     private Button BookingButton;
     private EditText loginInputIDUser;
+    private ImageView mImageView;
     Spinner spinner;
     ArrayList<String> PlateNumber;
     String url;
@@ -81,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         TextPlate = (TextView) findViewById( R.id.textViewPlate );
         BookingButton = (Button) findViewById( R.id.btn_booking );
         loginInputIDUser   = (EditText)findViewById(R.id.email_input);
+        mImageView = (ImageView) findViewById(R.id.gambar);
+        mImageView.setImageResource(R.drawable.motor);
 
         BookingButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        CheckBooking();
+//                        CheckBooking();
 //                        if(": 0".equalsIgnoreCase(check_in))
 //                        {
 //                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -101,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 //                        else if(": 1".equalsIgnoreCase(check_in))
 //                        {
-//                            Intent i = new Intent(MainActivity.this, ControlActivity.class);
-//                            i.putExtra("id_user", id_user);
-//                            i.putExtra("plate", plate);
-//                            startActivity(i);
+                            Intent i = new Intent(MainActivity.this, ControlActivity.class);
+                            i.putExtra("id_user", id_user);
+                            i.putExtra("plate", plate);
+                            startActivity(i);
 //                        }
                     }
                 }, 3000L); //3000 L = 3 detik
@@ -135,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
                 // DO Nothing here
             }
         });
+
+
     }
 
     @Override

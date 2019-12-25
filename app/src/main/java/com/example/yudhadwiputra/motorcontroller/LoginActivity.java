@@ -9,12 +9,14 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,11 +77,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void userLogin() {
         //first getting the values
-        final String username = editTextUsername.getText().toString();
+        final String email = editTextUsername.getText().toString();
         final String password = editTextPassword.getText().toString();
 
         //validating inputs
-        if (TextUtils.isEmpty(username)) {
+        if (TextUtils.isEmpty(email)) {
             editTextUsername.setError("Please enter your username");
             editTextUsername.requestFocus();
             return;
@@ -112,23 +114,24 @@ public class LoginActivity extends AppCompatActivity {
 
                 try {
                     //converting response to json object
-                    JSONObject obj = new JSONObject(s);
+                    JSONArray jsonArray = new JSONArray(s);
+                    JSONObject jsonObject1=jsonArray.getJSONObject(0);
+//                    JSONObject obj = new JSONObject(s);
 
                     //if no error in response
 
                     //if (!obj.getBoolean("error")) {
-                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), jsonObject1.getString("nama"), Toast.LENGTH_SHORT).show();
+
 
                     //getting the user from the response
                     // JSONObject userJson = obj.getJSONObject("user");
 
                     //creating a new user object
                     User user = new User(
-                            obj.getInt("id"),
-                            obj.getString("username"),
-                            obj.getString("email"),
-                            obj.getString("phoneNumber"),
-                            obj.getString("address")
+                            jsonObject1.getInt("id_user"),
+                            jsonObject1.getString("nama"),
+                            jsonObject1.getString("email")
                     );
 
                     //storing the user in shared preferences
@@ -152,11 +155,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
+                params.put("email", email);
                 params.put("password", password);
 
                 //returing the response
-                return requestHandler.sendPostRequest("http://yudha2putra.000webhostapp.com/api.php?apicall=login", params);
+                return requestHandler.sendPostRequest("https://tandebike.id/api/Data/login", params);
             }
         }
 

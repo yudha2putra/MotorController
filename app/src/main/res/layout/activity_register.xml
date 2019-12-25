@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".RegisterActivity">
 
 
@@ -16,8 +17,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="98dp"
-            android:layout_height="132dp"
+            android:layout_width="198dp"
+            android:layout_height="232dp"
             android:layout_gravity="center"
             android:src="@drawable/banner_tandebike" />
         <TextView
@@ -68,27 +69,6 @@
             android:fontFamily="sans-serif"
             android:hint="Re-Enter Password"
             android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/editTextphoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="3dp"
-            android:fontFamily="sans-serif"
-            android:hint="Phone Number"
-            android:inputType="textPhonetic" />
-
-        <EditText
-            android:id="@+id/editTextAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="3dp"
-            android:fontFamily="sans-serif"
-            android:hint="Address"
-            android:inputType="textPostalAddress" />
-
 
         <Button
             android:id="@+id/buttonRegister"

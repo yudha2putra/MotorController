@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextEmail, editTextPassword, editTextRePassword, editTextphoneNumber, editTextAddress;
+    EditText editTextUsername, editTextEmail, editTextPassword, editTextRePassword;
 
 
     @Override
@@ -36,8 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextRePassword = (EditText) findViewById(R.id.editTextRePassword);
-        editTextphoneNumber = (EditText) findViewById(R.id.editTextphoneNumber);
-        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
 
 
         findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
@@ -66,8 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
         final String repassword = editTextRePassword.getText().toString().trim();
-        final String phoneNumber = editTextphoneNumber.getText().toString().trim();
-        final String address = editTextAddress.getText().toString().trim();
 
         //first we will do the validations
 
@@ -119,14 +115,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
+                params.put("nama", username);
                 params.put("email", email);
                 params.put("password", password);
-                params.put("phoneNumber", phoneNumber);
-                params.put("address", address);
 
                 //returing the response
-                return requestHandler.sendPostRequest("http://yudha2putra.000webhostapp.com/api.php?apicall=signup", params);
+                return requestHandler.sendPostRequest("https://tandebike.id/api/Data/users", params);
             }
 
             @Override
@@ -157,10 +151,8 @@ public class RegisterActivity extends AppCompatActivity {
                     //creating a new user object
                     User user = new User(
                             userJson.getInt("id"),
-                            userJson.getString("username"),
-                            userJson.getString("email"),
-                            userJson.getString("phoneNumber"),
-                            userJson.getString("address")
+                            userJson.getString("nama"),
+                            userJson.getString("email")
                     );
 
                     //storing the user in shared preferences
