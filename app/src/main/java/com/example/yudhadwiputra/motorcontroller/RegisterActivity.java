@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText editTextUsername, editTextEmail, editTextPassword, editTextRePassword;
-
+    SharedPrefManager sharedPrefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +26,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //if the user is already logged in we will directly start the profile activity
-        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+        sharedPrefManager = new SharedPrefManager(this);
+        if (sharedPrefManager.getSPSudahLogin()){
+            startActivity(new Intent(RegisterActivity.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
-            startActivity(new Intent(this, MainActivity.class));
-            return;
         }
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
@@ -156,7 +157,8 @@ public class RegisterActivity extends AppCompatActivity {
                     );
 
                     //storing the user in shared preferences
-                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
+//                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
                     //starting the profile activity
                     finish();

@@ -13,60 +13,45 @@ import android.content.SharedPreferences;
 public class SharedPrefManager {
 
     //the constants
-    private static final String SHARED_PREF_NAME = "simplifiedcodingsharedpref";
-    private static final String KEY_USERNAME = "keyusername";
-    private static final String KEY_EMAIL = "keyemail";
-    private static final String KEY_PHONENUMBER = "keyphonenumber";
-    private static final String KEY_ADDRESS = "keyaddress";
-    private static final String KEY_ID = "keyid";
+    public static final String SP_MAHASISWA_APP = "spMahasiswaApp";
 
-    private static SharedPrefManager mInstance;
-    private static Context mCtx;
+    public static final String SP_NAMA = "spNama";
+    public static final String SP_EMAIL = "spEmail";
 
-    private SharedPrefManager(Context context) {
-        mCtx = context;
+    public static final String SP_SUDAH_LOGIN = "spSudahLogin";
+
+    SharedPreferences sp;
+    SharedPreferences.Editor spEditor;
+
+    public SharedPrefManager(Context context){
+        sp = context.getSharedPreferences(SP_MAHASISWA_APP, Context.MODE_PRIVATE);
+        spEditor = sp.edit();
     }
 
-    public static synchronized SharedPrefManager getInstance(Context context) {
-        if (mInstance == null) {
-            mInstance = new SharedPrefManager(context);
-        }
-        return mInstance;
+    public void saveSPString(String keySP, String value){
+        spEditor.putString(keySP, value);
+        spEditor.commit();
     }
 
-    //method to let the user login
-    //this method will store the user data in shared preferences
-    public void userLogin(User user) {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_ID, user.getId());
-        editor.putString(KEY_USERNAME, user.getUsername());
-        editor.putString(KEY_EMAIL, user.getEmail());
-        editor.apply();
+    public void saveSPInt(String keySP, int value){
+        spEditor.putInt(keySP, value);
+        spEditor.commit();
     }
 
-    //this method will checker whether user is already logged in or not
-    public boolean isLoggedIn() {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_USERNAME, null) != null;
+    public void saveSPBoolean(String keySP, boolean value){
+        spEditor.putBoolean(keySP, value);
+        spEditor.commit();
     }
 
-    //this method will give the logged in user
-    public User getUser() {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return new User(
-                sharedPreferences.getInt(KEY_ID, -1),
-                sharedPreferences.getString(KEY_USERNAME, null),
-                sharedPreferences.getString(KEY_EMAIL, null)
-        );
+    public String getSPNama(){
+        return sp.getString(SP_NAMA, "");
     }
 
-    //this method will logout the user
-    public void logout() {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        mCtx.startActivity(new Intent(mCtx, LoginActivity.class));
+    public String getSPEmail(){
+        return sp.getString(SP_EMAIL, "");
+    }
+
+    public Boolean getSPSudahLogin(){
+        return sp.getBoolean(SP_SUDAH_LOGIN, false);
     }
 }

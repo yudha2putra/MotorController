@@ -29,12 +29,20 @@ public class LoginActivity extends AppCompatActivity {
     private AppCompatAutoCompleteTextView autoTextViewCustom;
 
     private AppCompatCheckBox checkbox;
+    SharedPrefManager sharedPrefManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sharedPrefManager = new SharedPrefManager(this);
+        if (sharedPrefManager.getSPSudahLogin()){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -135,7 +143,8 @@ public class LoginActivity extends AppCompatActivity {
                     );
 
                     //storing the user in shared preferences
-                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
+//                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
                     //starting the profile activity
                     finish();
